@@ -3,15 +3,28 @@ import "./App.css";
 
 function App() {
   return (
-    <div className="App">
+    <div>
+      <Header/>
       <Board />
+    </div>
+  );
+}
+function Header() {
+  return (
+    <div className="Header">
+      <h1>Tic Tac Toe </h1>
+      <p>Play with your friend 1v1😚 </p>
     </div>
   );
 }
 
 export default App;
 function Carre({ value, click }) {
-  return <button onClick={click}>{value}</button>;
+  return (
+    <button className="carre" onClick={click}>
+      {value}
+    </button>
+  );
 }
 function Board() {
   const [carees, setcarees] = useState(Array(9).fill(null));
@@ -29,14 +42,14 @@ function Board() {
   if (winner) {
     status = `Winner on the game : ${winner}`;
   } else {
-    status = `next player turn ${isX ? "X" : "O"}`;
+    status = `next player turn : ${isX ? "X" : "O"}`;
   }
   function restart() {
     setcarees(Array(9).fill(null));
     setisX(true);
   }
   return (
-    <div>
+    <div className="board">
       <div className="row">
         <Carre value={carees[0]} click={() => handleclick(0)} />
         <Carre value={carees[1]} click={() => handleclick(1)} />
@@ -52,8 +65,11 @@ function Board() {
         <Carre value={carees[7]} click={() => handleclick(7)} />
         <Carre value={carees[8]} click={() => handleclick(8)} />
       </div>
+
       <p>{status}</p>
-      <button onClick={restart}>Restart the game</button>
+      <button onClick={restart} className="button-8">
+        Restart the game
+      </button>
     </div>
   );
 }
