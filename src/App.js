@@ -4,7 +4,7 @@ import "./App.css";
 function App() {
   return (
     <div>
-      <Header/>
+      <Header />
       <Board />
     </div>
   );
@@ -42,8 +42,25 @@ function Board() {
   if (winner) {
     status = `Winner on the game : ${winner}`;
   } else {
-    status = `next player turn : ${isX ? "X" : "O"}`;
-  }
+    if(carees.every(c=>c)) {
+      status = 'draw'
+        }
+      
+    else  status = `next player turn : ${isX ? "X" : "O"}`;
+  };
+  
+  // if (!winner && isFull(carees)) {
+  //   status = "draw😀";
+  // } 
+
+  // function isFull(Array) {
+  //   for (let i = 0; i < Array.length; i++) {
+  //     if (Array[i] === null || Array[i] === undefined) {
+  //       return false;
+  //     }
+  //     return true;
+  //   }
+  // }
   function restart() {
     setcarees(Array(9).fill(null));
     setisX(true);
@@ -67,7 +84,7 @@ function Board() {
       </div>
 
       <p>{status}</p>
-      <button onClick={restart} className="button-8">
+      <button onClick={restart} className={status==='draw' ? "btn-hover color-9" :"button-8"}>
         Restart the game
       </button>
     </div>
@@ -84,11 +101,16 @@ function calculerWinner(carees) {
     [0, 4, 8],
     [2, 4, 6],
   ];
-  for (let i = 0; i < winningpatterns.length; i++) {
-    const [a, b, c] = winningpatterns[i];
-    if (carees && carees[a] === carees[b] && carees[a] === carees[c]) {
-      return carees[a];
-    }
+ 
+ for (let i=0;i<winningpatterns.length;i++){
+  const [a,b,c]=winningpatterns[i];
+  if (carees && carees[a]===carees[b]&&carees[a]===carees[c]){
+    return carees[a]
   }
-  return null;
+ 
+ }
+ return null
 }
+
+ 
+ 
